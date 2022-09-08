@@ -9,7 +9,9 @@ from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import ElementClickInterceptedException as CLKERROR
 from selenium.webdriver.support.select import Select
 from time import sleep
-
+from time import strftime
+from colorama import init , Fore
+init(autoreset=True)
 url = 'https://citas.sre.gob.mx'
 chrome_options = Options()
 chrome_options.add_argument("--start-maximized")
@@ -25,6 +27,8 @@ last_name_is = "KHAVARI"
 yy_birth = 2000 
 mm_birth = 1
 dd_birth = 15
+gender = ["fe", "ma"]
+marital = ["sol", "cas"]
 
 en_xpath = '//*[@id="subenlaces"]/ul[4]/a'
 btn_consular_xpath = '/html/body/div[2]/div/main/div/div/div/div/div[1]/div/div/div/div/div/div/div/div[3]/div/div/div/button[2]'
@@ -50,6 +54,17 @@ slecet_month_xpath = '//*[@id="ui-datepicker-div"]/div/div/select[1]'
 date_input_xpath = '//input[@placeholder="YYYY-MM-DD"]'
 # elem_table_xpath = '//*[@id="ui-datepicker-div"]/table'
 day_xpath = '//td[@data-handler="selectDay"]/a'
+gender_xpath = '//*[@id="vs5__combobox"]/div[1]/input'
+nationality_xpath = '//*[@id="vs6__combobox"]/div[1]/input'
+marital_xpath = '//*[@id="vs7__combobox"]/div[1]/input'
+marital_q_xpath = '/html/body/div[2]/div[3]/div[3]/div/div/div/div[2]/div[1]/form/div[3]/div/div/div/div[3]/form/div[3]/div[2]/p/label[1]/input'
+country_born_xpath = '//*[@id="vs8__combobox"]/div[1]/input'
+province_born_xpath = '//*[@id="vs9__combobox"]/div[1]/input'
+introduce_city_xpath = "/html/body/div[2]/div[3]/div[3]/div/div/div/div[2]/div[1]/form/div[3]/div/div/div/div[3]/form/div[6]/div[1]/div/input"
+
+
+
+
 
 
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, en_xpath))).click()
@@ -59,56 +74,76 @@ WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, password_x
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_check_xpath))).click()
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_warning1_xpath))).click()
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_start_xpath))).click()
-print("logged in")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"logged in")
 WebDriverWait(driver,200).until(EC.url_matches("https://citas.sre.gob.mx/inbox"))
-print("inbox ")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"inbox ")
 btn_warning2 = driver.find_element(By.XPATH , btn_warning2_xpath)
-print("btn_warning 2 found")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"btn_warning 2 found")
 sleep(.25)
 try:
     btn_warning2.click()
-    print("in first try")
+    print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"in first try")
 except CLKERROR:
     sleep(.25)
     btn_warning2.click()
-    print("in try again")
+    print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"in try again")
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, btn_schedule_xpath))).click()
 WebDriverWait(driver,200).until(EC.url_matches("https://citas.sre.gob.mx/appointment"))
-print("appointment ")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"appointment ")
 sleep(4)
 btn_warning3 = driver.find_element(By.XPATH , btn_warning3_xpath)
-print("btn_warning 3 found")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"btn_warning 3 found")
 btn_warning3.click()
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, country_xpath))).send_keys(country_name, Keys.ENTER)
-print("country selected")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"country selected")
 sleep(2)
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, province_xpath))).send_keys(Keys.ARROW_DOWN, Keys.ENTER)
-print("city selected")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"city selected")
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, office_xpath))).send_keys(Keys.ARROW_DOWN, Keys.ENTER)
-print("office slected")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"office slected")
 sleep(5)
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_select_xpath))).click()
-print("office decieded")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"office decieded")
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_accept_xpath))).click()
-print("accepted")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"accepted")
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, manually_xpath))).click()
-print("manually")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"manually")
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, first_name_xpath))).send_keys(first_name_is)
-print("name typed")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"name typed")
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, last_name_xpath))).send_keys(last_name_is)
-print("last name typed")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"last name typed")
 driver.find_element(By.XPATH, date_input_xpath).click()
-print("date open")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"date open")
 select_month = driver.find_element(By.XPATH, slecet_month_xpath)
-print("month found")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"month found")
 select_month_object = Select(select_month)
 select_month_object.select_by_index(str(mm_birth-1))
-print("month selected")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"month selected")
 select_year = driver.find_element(By.XPATH, select_year_xpath)
-print("year found")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"year found")
 select_year_object = Select(select_year)
 select_year_object.select_by_value(str(yy_birth))
-print("year selected")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"year selected")
 days = driver.find_elements(By.XPATH , day_xpath)
 days[dd_birth - 1].click()    
-print("date picked")
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"date picked")
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, gender_xpath))).send_keys(gender[1], Keys.ENTER)
+# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, gender_xpath))).send_keys(gender[0], Keys.ENTER)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"gender selected")
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, nationality_xpath))).send_keys("iran", Keys.ENTER)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"iran selected")
+# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, marital_xpath))).send_keys(marital[0], Keys.ENTER)
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, marital_xpath))).send_keys(marital[1], Keys.ENTER)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"marital selected")
+WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, marital_q_xpath))).click()
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, country_born_xpath))).send_keys("iran", Keys.ENTER)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"iran selected")
+# sleep(3)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"province found")
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, province_born_xpath))).send_keys("Tehran", Keys.ENTER)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"tehran selected")
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, introduce_city_xpath))).send_keys("QOM", Keys.ENTER)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"city typed")
+
+while(True):
+    ...
