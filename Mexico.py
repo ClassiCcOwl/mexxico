@@ -17,6 +17,7 @@ chrome_options = Options()
 chrome_options.add_argument("--start-maximized")
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()) , options=chrome_options)
 driver.get(url)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"landed on url")
 driver.implicitly_wait(20)
 
 my_email = 'khavari.7878@yahoo.com'
@@ -68,11 +69,15 @@ introduce_city_xpath = "/html/body/div[2]/div[3]/div[3]/div/div/div/div[2]/div[1
 
 
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, en_xpath))).click()
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"english selected")
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_consular_xpath))).click()
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, email_xpath))).send_keys(my_email)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"email typed")
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, password_xpath))).send_keys(my_password)
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"password typed")
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_check_xpath))).click()
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_warning1_xpath))).click()
+print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"btn_warning 1 found")
 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, btn_start_xpath))).click()
 print(Fore.GREEN+"[" + Fore.YELLOW + strftime("%H:%M:%S") + Fore.GREEN+"]" ,Fore.CYAN+"logged in")
 WebDriverWait(driver,200).until(EC.url_matches("https://citas.sre.gob.mx/inbox"))
